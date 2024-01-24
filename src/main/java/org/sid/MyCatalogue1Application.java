@@ -22,13 +22,14 @@ public class MyCatalogue1Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		iProduitRespository.save(new Produit(null,"Iphone 12",3450,45));
-		iProduitRespository.save(new Produit(null,"Iphone 11 max",2500,50));
-		iProduitRespository.save(new Produit(null,"Iphone 13 max pro",5000,100));
-		
-		iProduitRespository.findAll().forEach(p->{
-			System.out.println(p.toString());
-		});
+		/*
+		 * iProduitRespository.save(new Produit(null,"Iphone 12",3450,45));
+		 * iProduitRespository.save(new Produit(null,"Iphone 11 max",2500,50));
+		 * iProduitRespository.save(new Produit(null,"Iphone 13 max pro",5000,100));
+		 * 
+		 * iProduitRespository.findAll().forEach(p->{ System.out.println(p.toString());
+		 * });
+		 */
 
 
 		

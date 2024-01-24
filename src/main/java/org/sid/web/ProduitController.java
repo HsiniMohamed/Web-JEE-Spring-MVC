@@ -7,14 +7,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
+
 
 @Controller
 public class ProduitController {
 	
 	@Autowired
 	private IProduitRespository iProduitRespository;
+	
+	@GetMapping(path="/")
+	public String index() {
+		
+		return "redirect:/index";
+	}
 	
 	@GetMapping(path="/index")
 	public String products(Model model,
@@ -35,5 +46,27 @@ public class ProduitController {
 		iProduitRespository.deleteById(id);
 		return "redirect:/index?page="+page+"&motCle="+motCle+"&size="+size;
 	}
+	
+	@GetMapping(path="/form")
+	public String formProduit(Model model) {	
+		model.addAttribute("produit",new Produit());
+		return "formProduit";
+	}
+	
+	@PostMapping(path="/save")
+	public String save(@Valid Produit produit, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) return "formProduit";
+		iProduitRespository.save(produit);
+		model.addAttribute("produit",produit);
+		return "confirmation";
+	}
+	
+	@GetMapping(path="/edit")
+	public String edit(Model model, long id) {	
+		Produit produit = iProduitRespository.findById(id).get();
+		model.addAttribute("produit",produit);
+		return "editProduit";
+	}
+	
 
 }

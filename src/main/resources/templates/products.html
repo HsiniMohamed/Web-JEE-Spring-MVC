@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="LayouTemplate" >
 <head>
 <meta charset="utf-8">
 <title>Produits</title>
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" />
 </head>
 <body>
+<div layout:fragment="pageContent">
 <div class="container mt-3">
 <div class="card">
 <div class="card-header">Liste des produits</div>
@@ -29,7 +32,10 @@
 <td th:text="${p.quantite}"></td>
 <td >
  <a onclick="javascript:return confirm('Etes vous sùre?')" class="btn-sm btn-danger"
-	th:href="@{deleteProduit(id=${p.id},page=${currentPage},size=${size},motCle=${motCle})}">Delete</a></td>
+	th:href="@{deleteProduit(id=${p.id},page=${currentPage},size=${size},motCle=${motCle})}">Delete</a>
+	<a  class="btn-sm btn-secondary"
+	th:href="@{edit(id=${p.id})}">Edit</a></td>
+	</td>
 		 
 </tr>
 </table>
@@ -45,5 +51,6 @@
 </div>
 
 
+</div>
 </body>
 </html>
