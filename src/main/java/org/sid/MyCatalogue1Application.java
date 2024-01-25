@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class MyCatalogue1Application implements CommandLineRunner{
@@ -20,8 +23,7 @@ public class MyCatalogue1Application implements CommandLineRunner{
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-		
+	public void run(String... args) throws Exception {	
 		/*
 		 * iProduitRespository.save(new Produit(null,"Iphone 12",3450,45));
 		 * iProduitRespository.save(new Produit(null,"Iphone 11 max",2500,50));
@@ -30,9 +32,11 @@ public class MyCatalogue1Application implements CommandLineRunner{
 		 * iProduitRespository.findAll().forEach(p->{ System.out.println(p.toString());
 		 * });
 		 */
-
-
-		
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }
